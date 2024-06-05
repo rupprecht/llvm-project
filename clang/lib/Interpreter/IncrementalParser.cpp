@@ -407,6 +407,9 @@ void IncrementalParser::CleanUpPTU(PartialTranslationUnit &PTU) {
     }
   }
 
+  Preprocessor &PP = CI->getPreprocessor();
+  if (PP.getLangOpts().CPlusPlus) return;
+
   // FIXME: We should de-allocate MostRecentTU
   for (Decl *D : MostRecentTU->decls()) {
     auto *ND = dyn_cast<NamedDecl>(D);
