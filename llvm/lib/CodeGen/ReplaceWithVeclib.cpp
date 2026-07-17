@@ -312,6 +312,8 @@ static bool runImpl(const TargetLibraryInfo &TLI, Function &F) {
     }
 
     // Process only intrinsic calls that return void or a vector.
+    if (II->getIntrinsicID() == Intrinsic::not_intrinsic)
+      continue;
     if (!II->getType()->isVectorTy() && !II->getType()->isVoidTy())
       continue;
 
